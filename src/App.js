@@ -73,19 +73,21 @@ function App() {
         );
       } else {
         setCartItems((prev) => [...prev, obj]);
-				const {data} = await axios.post(
+        const { data } = await axios.post(
           "https://638e1f484190defdb7570fca.mockapi.io/cart",
           obj
         );
-        setCartItems((prev) => prev.map(item => {
-					if (item.parentId === data.parentId) {
-						return {
-							...item,
-							id: data.id
-						};
-					}
-					return item;
-				}));
+        setCartItems((prev) =>
+          prev.map((item) => {
+            if (item.parentId === data.parentId) {
+              return {
+                ...item,
+                id: data.id,
+              };
+            }
+            return item;
+          })
+        );
       }
     } catch (error) {
       alert("Ошибка при добавлении в корзину");
